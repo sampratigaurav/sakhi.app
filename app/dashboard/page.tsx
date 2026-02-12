@@ -1,7 +1,7 @@
  'use client';
  
  import { useEffect, useState } from 'react';
-import { Wallet, ClipboardList, Star, Target, Sparkles, ShieldAlert, PhoneCall, MapPin, MessageCircle } from 'lucide-react';
+import { Wallet, ClipboardList, Star, Target, Sparkles, ShieldAlert, PhoneCall, MapPin, MessageCircle, Menu, LogOut } from 'lucide-react';
  import Image from 'next/image';
  import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/context/AuthContext';
@@ -9,8 +9,8 @@ import { useToast } from '@/src/context/ToastContext';
  import Link from 'next/link';
 import EmptyState from '@/app/components/EmptyState';
  
- export default function Dashboard() {
-   const { user } = useAuth();
+export default function Dashboard() {
+  const { user, logout } = useAuth();
    const router = useRouter();
   const { show } = useToast();
    useEffect(() => {
@@ -117,8 +117,54 @@ import EmptyState from '@/app/components/EmptyState';
    setTimeout(() => setFakeCall(false), 5000);
  };
  
+const [isOpen, setIsOpen] = useState(false);
+const doLogout = () => {
+  try {
+    logout();
+    (typeof window !== 'undefined') && localStorage.setItem('isLoggedIn', 'false');
+  } catch {}
+  router.push('/');
+};
+
    return (
     <div className="min-h-screen bg-[#FDFBF7] py-12">
+      <button
+        type="button"
+        className="md:hidden fixed top-20 left-4 z-50 rounded-md bg-white/80 backdrop-blur px-3 py-2 border border-stone-300 text-[#4A4A4A]"
+        onClick={() => setIsOpen((v) => !v)}
+        aria-label="Open sidebar menu"
+      >
+        <Menu className="h-6 w-6" />
+      </button>
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+      <div
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:static md:inset-auto shadow-lg md:shadow-none`}
+      >
+        <div className="h-full flex flex-col">
+          <div className="p-4 border-b border-stone-200">
+            <div className="font-semibold text-[#4A4A4A]">Menu</div>
+          </div>
+          <div className="flex-1 p-4 space-y-3">
+            <Link href="/dashboard" className="block rounded-lg px-3 py-2 text-[#4A4A4A] hover:bg-gray-50">Dashboard</Link>
+            <Link href="/learn" className="block rounded-lg px-3 py-2 text-[#4A4A4A] hover:bg-gray-50">Learn & Grow</Link>
+          </div>
+          <div className="p-4 border-t border-stone-200 mt-auto">
+            <button
+              type="button"
+              onClick={doLogout}
+              className="w-full inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-white font-semibold hover:bg-red-700"
+            >
+              <LogOut className="h-5 w-5" />
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <div className="rounded-2xl bg-gradient-to-r from-[#C08081] to-[#F59E0B] text-white p-6 shadow-sm">
