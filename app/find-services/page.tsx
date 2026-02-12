@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useToast } from '@/src/context/ToastContext';
 import ServiceDetailModal from '../components/ServiceDetailModal';
+import ServiceCard from '../components/ServiceCard';
 
 export default function FindServices() {
   const { t, language } = useLanguage();
@@ -217,7 +218,7 @@ export default function FindServices() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] py-12">
+    <div className="pt-24 md:pt-28 min-h-screen bg-[#F9F4EF] py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-5xl font-serif text-center mb-6" style={{ fontFamily: 'Playfair Display, serif', color: '#4A4A4A' }}>
@@ -427,15 +428,14 @@ export default function FindServices() {
                     })()}
                   </div>
                   <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setShowReviewsFor(provider.id)}
-                      onMouseDown={(e) => e.stopPropagation()}
-                      onClickCapture={(e) => e.stopPropagation()}
-                      className="inline-flex items-center rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-[#4A4A4A] shadow-sm hover:bg-gray-50"
-                    >
-                      {t('viewReviewsBtn')}
-                    </button>
+                    <ServiceCard
+                      provider={provider}
+                      onShowReviews={(p) => {
+                        setDetailProvider(p);
+                        setDonateOpen(false);
+                      }}
+                      onBook={() => {}}
+                    />
                     <div className="flex items-center text-[#C08081] font-semibold">
                       <span>₹{provider.price}</span>
                     </div>

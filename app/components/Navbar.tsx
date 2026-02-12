@@ -33,7 +33,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-[#F9F4EF]">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-[#F9F4EF] shadow-sm h-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">

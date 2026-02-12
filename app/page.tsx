@@ -24,47 +24,43 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#F9F4EF]">
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-10">
-          <div>
-            <h1 className="font-serif text-[#4A3B32] text-5xl md:text-7xl leading-tight">
-              Empowering Women, One Skill at a Time
-            </h1>
-            <p className="text-[#6D5D53] text-lg md:text-xl mt-6">
-              Find verified local talent for tailoring, cooking, and more.
-            </p>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+      <section className="relative w-full h-[600px] md:h-[700px] min-h-[300px] flex items-center overflow-hidden bg-[#F9F4EF] pt-24">
+        <img
+          src="/hero-banner.jpg.jpeg"
+          alt="SkillSakhi Hero"
+          className="absolute inset-0 w-full h-full object-cover object-[80%_20%]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#F9F4EF] via-[#F9F4EF]/80 to-transparent w-full md:w-[65%]" />
+        <div className="relative z-10 max-w-2xl px-6 md:px-12">
+          <h1 className="text-5xl md:text-7xl font-serif text-[#4A3B32] leading-tight">
+            Empowering Women, One Skill at a Time
+          </h1>
+          <p className="text-lg text-[#6D5D53] mt-6 mb-8 max-w-md">
+            Find verified local talent for tailoring, cooking, and more.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link
+              href="/find-services"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#C06C5D] text-white rounded-full font-semibold hover:opacity-90 transition-all"
+            >
+              Find Services
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+            {user?.role === 'worker' ? (
               <Link
-                href="/find-services"
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#C06C5D] text-white rounded-full font-semibold hover:opacity-90 transition-all"
+                href="/dashboard"
+                className="inline-flex items-center justify-center px-8 py-4 border border-[#BCA488] text-[#5C4D46] rounded-full font-semibold hover:bg-white/40 transition-all"
               >
-                Find Services
-                <ArrowRight className="ml-2 w-5 h-5" />
+                Go to Dashboard
               </Link>
-              {user?.role === 'worker' ? (
-                <Link
-                  href="/dashboard"
-                  className="inline-flex items-center justify-center px-8 py-4 border border-[#BCA488] text-[#5C4D46] rounded-full font-semibold hover:bg-white/40 transition-all"
-                >
-                  Go to Dashboard
-                </Link>
-              ) : user?.role === 'customer' ? null : (
-                <Link
-                  href="/register"
-                  className="inline-flex items-center justify-center px-8 py-4 border border-[#BCA488] text-[#5C4D46] rounded-full font-semibold hover:bg-white/40 transition-all"
-                >
-                  {language === 'hi' ? 'पंजीकरण करें' : 'Register as Provider'}
-                </Link>
-              )}
-            </div>
-          </div>
-          <div className="relative w-full h-[500px] md:h-[600px] rounded-2xl overflow-hidden">
-            <img
-              src="/hero-banner.jpg"
-              alt="SkillSakhi Hero"
-              className="w-full h-full object-cover object-left md:object-center mask-image-gradient"
-              style={{ maskImage: 'linear-gradient(to right, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 20%)' }}
-            />
+            ) : user?.role === 'customer' ? null : (
+              <Link
+                href="/register"
+                className="inline-flex items-center justify-center px-8 py-4 border border-[#BCA488] text-[#5C4D46] rounded-full font-semibold hover:bg-white/40 transition-all"
+              >
+                {language === 'hi' ? 'पंजीकरण करें' : 'Register as Provider'}
+              </Link>
+            )}
           </div>
         </div>
       </section>
