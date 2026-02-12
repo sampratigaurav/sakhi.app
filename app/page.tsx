@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRight, Search, Star, MessageCircle, CheckCircle, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { useAuth } from '@/app/context/AuthContext';
@@ -23,67 +22,49 @@ export default function Home() {
   const isAdmin = (user?.role === 'admin') || simulateAdmin;
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7]">
+    <div className="min-h-screen bg-[#F9F4EF]">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-        <div className="text-center">
-          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium mb-6 bg-[#EDEFE9] text-[#8F9E8B]">
-            <Sparkles className="w-4 h-4" />
-            <span>Empowering Women Through Skills</span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl mb-6" style={{ color: '#4A4A4A', fontFamily: 'Playfair Display, serif' }}>
-            {t('heroTitle')}
-          </h1>
-          <p className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto" style={{ color: '#4A4A4A' }}>
-            {t('heroSubtitle')}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/find-services"
-              className="inline-flex items-center justify-center px-8 py-4 bg-[#C08081] text-white rounded-full font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-sm"
-            >
-              {t('heroFindServicesBtn')}
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-            {user?.role === 'worker' ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-10">
+          <div>
+            <h1 className="font-serif text-[#4A3B32] text-5xl md:text-7xl leading-tight">
+              Empowering Women, One Skill at a Time
+            </h1>
+            <p className="text-[#6D5D53] text-lg md:text-xl mt-6">
+              Find verified local talent for tailoring, cooking, and more.
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <Link
-                href="/dashboard"
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#8F9E8B] text-white rounded-full font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-sm"
+                href="/find-services"
+                className="inline-flex items-center justify-center px-8 py-4 bg-[#C06C5D] text-white rounded-full font-semibold hover:opacity-90 transition-all"
               >
-                Go to Dashboard
+                Find Services
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
-            ) : user?.role === 'customer' ? null : (
-              <Link
-                href="/register"
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#8F9E8B] text-white rounded-full font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-sm"
-              >
-                {language === 'hi' ? 'पंजीकरण करें' : t('heroRegisterProviderBtn')}
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            )}
+              {user?.role === 'worker' ? (
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center justify-center px-8 py-4 border border-[#BCA488] text-[#5C4D46] rounded-full font-semibold hover:bg-white/40 transition-all"
+                >
+                  Go to Dashboard
+                </Link>
+              ) : user?.role === 'customer' ? null : (
+                <Link
+                  href="/register"
+                  className="inline-flex items-center justify-center px-8 py-4 border border-[#BCA488] text-[#5C4D46] rounded-full font-semibold hover:bg-white/40 transition-all"
+                >
+                  {language === 'hi' ? 'पंजीकरण करें' : 'Register as Provider'}
+                </Link>
+              )}
+            </div>
           </div>
-          {isAdmin && (
-            <div className="mt-6">
-              <Link
-                href="/admin"
-                className="inline-flex items-center gap-2 text-stone-500 hover:text-[#C08081] underline decoration-dotted underline-offset-4 text-sm font-medium transition-colors"
-              >
-                <span>🛡️ Go to Admin Dashboard</span>
-              </Link>
-            </div>
-          )}
-          <div className="mt-10 relative">
-            <div className="relative w-full h-56 sm:h-72 md:h-96 rounded-2xl overflow-hidden">
-              <Image
-                src="https://images.unsplash.com/photo-1582738411981-993c30a9f407?q=80&w=1600&auto=format&fit=crop"
-                alt="Women working"
-                fill
-                className="object-cover"
-                sizes="100vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/40 to-transparent" />
-            </div>
+          <div className="relative w-full h-[500px] md:h-[600px] rounded-2xl overflow-hidden">
+            <img
+              src="/hero-banner.jpg"
+              alt="SkillSakhi Hero"
+              className="w-full h-full object-cover object-left md:object-center mask-image-gradient"
+              style={{ maskImage: 'linear-gradient(to right, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 20%)' }}
+            />
           </div>
         </div>
       </section>

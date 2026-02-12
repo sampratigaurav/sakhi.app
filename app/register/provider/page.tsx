@@ -45,7 +45,6 @@
       role: 'provider',
       name: formData.name,
       phone: formData.phone,
-      password: '',
     };
     localStorage.setItem('users', JSON.stringify(users));
     localStorage.setItem('isLoggedIn', 'true');

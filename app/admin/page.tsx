@@ -1,9 +1,10 @@
  'use client';
  
- import { useServiceContext } from '@/app/context/ServiceContext';
+import { useServiceContext } from '@/app/context/ServiceContext';
  import Image from 'next/image';
  import { Pencil, Trash2 } from 'lucide-react';
  import { useEffect, useMemo, useState } from 'react';
+import AdminGuard from '@/app/components/auth/AdminGuard';
  
  export default function SuperAdminPage() {
    const { providers, toggleVerification, deleteProvider, updateProvider, addProvider } = useServiceContext();
@@ -68,8 +69,9 @@
      setShowEditFor(null);
    };
  
-   return (
-     <div className="min-h-screen bg-[#FDFBF7] py-12">
+  return (
+    <AdminGuard>
+    <div className="min-h-screen bg-[#FDFBF7] py-12">
        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between mb-8">
            <div>
@@ -189,6 +191,7 @@
            </div>
          </div>
        )}
-     </div>
+    </div>
+    </AdminGuard>
    );
  }

@@ -33,11 +33,11 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-transparent">
+    <nav className="bg-[#F9F4EF]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#4A4A4A' }}>
+            <span className="text-2xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#4A3B32' }}>
               SkillSakhi
             </span>
           </Link>

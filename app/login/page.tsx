@@ -16,9 +16,14 @@ import { useToast } from '@/src/context/ToastContext';
    const [otpStep, setOtpStep] = useState(false);
    const [otp, setOtp] = useState('');
    const [error, setError] = useState('');
+  const specialCharRegex = /[^a-zA-Z0-9 @.]/;
  
    const sendOtp = () => {
-     if (!phone) return;
+    if (!phone) return;
+    if (specialCharRegex.test(phone) || /[<>/;]/.test(phone)) {
+      setError('Invalid characters detected. Please remove symbols.');
+      return;
+    }
      setSending(true);
      setTimeout(() => {
        setSending(false);
@@ -28,7 +33,11 @@ import { useToast } from '@/src/context/ToastContext';
  
    const verify = async () => {
      setError('');
-     if (!otp) return;
+    if (!otp) return;
+    if (specialCharRegex.test(otp) || /[<>/;]/.test(otp)) {
+      setError('Invalid characters detected. Please remove symbols.');
+      return;
+    }
      const res = await login(phone, otp);
      if (!('success' in res) || !res.success) {
        setError('Invalid credentials');
@@ -80,6 +89,7 @@ import { useToast } from '@/src/context/ToastContext';
                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                    placeholder="+91 98765 43210"
                  />
+              {error && !otpStep && <div className="text-sm font-semibold text-red-600">{error}</div>}
                  <button
                    type="button"
                    onClick={sendOtp}

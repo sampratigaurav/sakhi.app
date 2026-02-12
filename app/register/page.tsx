@@ -24,9 +24,17 @@ export default function Register() {
   const [showCustomerForm, setShowCustomerForm] = useState(false);
   const [customer, setCustomer] = useState({ name: '', phone: '', password: '' });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const specialCharRegex = /[^a-zA-Z0-9 @.]/;
 
   const submitCustomer = (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    const unsafe = (s: string) => specialCharRegex.test(s) || /[<>/;]/.test(s);
+    if (unsafe(customer.name) || unsafe(customer.phone) || unsafe(customer.password)) {
+      setError('Invalid characters detected. Please remove symbols.');
+      return;
+    }
     setLoading(true);
     setTimeout(() => {
       const usersRaw = localStorage.getItem('users');
@@ -35,7 +43,6 @@ export default function Register() {
         role: 'customer',
         name: customer.name,
         phone: customer.phone,
-        password: customer.password,
       };
       localStorage.setItem('users', JSON.stringify(users));
       localStorage.setItem('isLoggedIn', 'true');
@@ -108,6 +115,7 @@ export default function Register() {
                   placeholder="Password"
                   required
                 />
+                {error && <div className="text-sm font-semibold text-red-600">{error}</div>}
                 <button
                   type="submit"
                   className="w-full inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-white font-semibold shadow hover:bg-blue-700 transition"

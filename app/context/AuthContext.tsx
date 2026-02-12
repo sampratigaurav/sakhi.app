@@ -35,7 +35,7 @@
      } catch {}
    }, []);
  
-   const login = async (phone: string, otp: string): Promise<LoginResult> => {
+  const login = async (phone: string, otp: string): Promise<LoginResult> => {
      setLoading(true);
      await new Promise((r) => setTimeout(r, 300));
      setLoading(false);
@@ -46,9 +46,9 @@
      if (otp !== '123456' && otp !== found.otp) {
        return { success: false, error: 'Invalid credentials' };
      }
-     const authUser: AuthUser = { phone: found.phone, role: found.role, name: found.name };
-     setUser(authUser);
-     localStorage.setItem('authUser', JSON.stringify(authUser));
+    const safeUser: AuthUser = { phone: found.phone, role: found.role, name: found.name };
+    setUser(safeUser);
+    localStorage.setItem('authUser', JSON.stringify(safeUser));
      localStorage.setItem('isLoggedIn', 'true');
      localStorage.setItem('userRole', found.role);
      localStorage.setItem('currentUser', JSON.stringify({ role: found.role, name: found.name, phone: found.phone, email: '' }));
