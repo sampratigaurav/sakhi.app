@@ -146,6 +146,7 @@ import AdminGuard from '@/app/components/auth/AdminGuard';
                            onClick={() => setShowEditFor(p.id)}
                            className="rounded-md border border-gray-200 bg-white px-3 py-2 text-gray-700 shadow-sm hover:bg-gray-50"
                            title="Edit"
+                           aria-label={`Edit ${p.name}`}
                          >
                            <Pencil className="h-4 w-4" />
                          </button>
@@ -156,6 +157,7 @@ import AdminGuard from '@/app/components/auth/AdminGuard';
                            }}
                            className="rounded-md border border-red-200 bg-white px-3 py-2 text-red-600 shadow-sm hover:bg-red-50"
                            title="Delete"
+                           aria-label={`Delete ${p.name}`}
                          >
                            <Trash2 className="h-4 w-4" />
                          </button>

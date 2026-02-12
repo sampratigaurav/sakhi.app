@@ -7,6 +7,7 @@ import { Wallet, ClipboardList, Star, Target, Sparkles, ShieldAlert, PhoneCall, 
 import { useAuth } from '@/app/context/AuthContext';
 import { useToast } from '@/src/context/ToastContext';
  import Link from 'next/link';
+import EmptyState from '@/app/components/EmptyState';
  
  export default function Dashboard() {
    const { user } = useAuth();
@@ -19,7 +20,7 @@ import { useToast } from '@/src/context/ToastContext';
    }, [user, router]);
  const [earnings, setEarnings] = useState(450);
   const [jobsCompleted, setJobsCompleted] = useState(12);
-   const [rating] = useState(4.8);
+  const [rating] = useState(4.8);
    const [goalCurrent, setGoalCurrent] = useState(5200);
    const goalTotal = 8000;
    const [pulse, setPulse] = useState(false);
@@ -27,6 +28,7 @@ import { useToast } from '@/src/context/ToastContext';
   const [amount, setAmount] = useState('');
   const [jobType, setJobType] = useState('Stitching');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [bookings, setBookings] = useState<any[]>([]);
  const [skillPoints, setSkillPoints] = useState(0);
  const pointsKey = user?.phone ? `skill_points_${user.phone}` : 'skill_points';
  const [showSOSModal, setShowSOSModal] = useState(false);
@@ -123,7 +125,7 @@ import { useToast } from '@/src/context/ToastContext';
             <div className="flex flex-col md:flex-row items-center gap-4">
               <Image
                 src="/providers/Sunita_Devi.jpg"
-                alt="Profile"
+                alt={`Profile photo of ${firstName}`}
                 width={64}
                 height={64}
                 className="w-16 h-16 rounded-full border-2 border-white object-cover shadow-md"
@@ -150,6 +152,27 @@ import { useToast } from '@/src/context/ToastContext';
           </div>
         </div>
  
+        <div className="mt-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#4A4A4A] mb-4">Recent Bookings</h2>
+          <div className="rounded-2xl bg-white border border-stone-200 shadow-sm">
+            {bookings.length === 0 ? (
+              <EmptyState message="No active jobs" />
+            ) : (
+              <div className="divide-y divide-gray-200">
+                {bookings.map((b, idx) => (
+                  <div key={idx} className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="font-semibold text-gray-900">{b.title}</div>
+                      <div className="text-sm text-gray-600">{b.date}</div>
+                    </div>
+                    <div className="text-sm text-gray-700 mt-1">{b.description}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
         <div className="mb-6">
           <div className="rounded-2xl bg-white border border-stone-200 shadow-sm hover:shadow-md p-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <div>

@@ -1,6 +1,6 @@
- 'use client';
- 
- import { useState, useEffect } from 'react';
+'use client';
+
+import { useState } from 'react';
  import { ShieldAlert, MapPin, PhoneCall, X } from 'lucide-react';
  import { useAuth } from '@/app/context/AuthContext';
  

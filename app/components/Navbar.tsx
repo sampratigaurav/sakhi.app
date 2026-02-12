@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/app/context/AuthContext';
 
 export default function Navbar() {
-  const { t, language, setLanguage } = useLanguage();
+  const { t, language } = useLanguage();
   const { user, logout } = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
   const [name, setName] = useState('');

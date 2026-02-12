@@ -76,7 +76,7 @@ export default function ChatAssistant() {
               <Sparkles size={18} className="animate-pulse" />
               <span className="font-bold">Sakhi AI</span>
             </div>
-            <button onClick={() => setIsOpen(false)} className="hover:bg-white/20 p-1 rounded-full transition">
+            <button aria-label="Close chat" onClick={() => setIsOpen(false)} className="hover:bg-white/20 p-1 rounded-full transition">
               <X size={18} />
             </button>
           </div>
@@ -129,6 +129,7 @@ export default function ChatAssistant() {
                 className="flex-1 bg-gray-100 text-gray-800 text-sm rounded-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500 transition w-full"
               />
               <button
+                aria-label="Send message"
                 onClick={() => handleSend(input)}
                 className="bg-orange-500 hover:bg-orange-600 text-white p-3 rounded-full shadow-lg transition transform active:scale-95 flex items-center justify-center"
               >
@@ -142,6 +143,7 @@ export default function ChatAssistant() {
       {/* Floating Toggle Button */}
       {!isOpen && (
         <button
+          aria-label="Open chat assistant"
           onClick={() => setIsOpen(true)}
           className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition duration-300 relative group"
         >

@@ -20,8 +20,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SkillSakhi - Empowering Women Through Skills",
-  description: "Connect with skilled women service providers for tailoring, mehendi, and more",
+  title: "SkillSakhi - Empowering Local Talent",
+  description: "Find verified local service providers for cooking, tailoring, and more.",
 };
 
 export default function RootLayout({

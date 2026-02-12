@@ -161,6 +161,7 @@
                    type="button"
                    onClick={onClose}
                    className="rounded-md border border-gray-200 bg-white p-2 text-gray-700 hover:bg-gray-50"
+                  aria-label="Close service details"
                  >
                    <X className="h-5 w-5" />
                  </button>
@@ -242,7 +243,7 @@
                      >
                        <Image
                          src={src}
-                         alt="Portfolio"
+                        alt="Portfolio sample"
                          width={96}
                          height={96}
                          className="w-24 h-24 rounded-lg object-cover"

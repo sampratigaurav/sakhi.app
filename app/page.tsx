@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Search, Star, MessageCircle, CheckCircle, Sparkles } from 'lucide-react';
+import { ArrowRight, Search, Star, MessageCircle, CheckCircle } from 'lucide-react';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { useAuth } from '@/app/context/AuthContext';
 import { useEffect, useState } from 'react';
